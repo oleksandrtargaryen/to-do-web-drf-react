@@ -1,0 +1,44 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.swp
+*.swo
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Django
+*.sqlite3
+db.sqlite3
+*.log
+*.pot
+*.py[cod]
+*.mo
+*.cover
+*.coverage
+.coverage.*
+htmlcov/
+local_settings.py
+
+# Media / uploads
+media/
+
+# Static files (можна генерувати заново)
+staticfiles/
+
+# IDE / Editor
+.idea/
+*.iml
+*.iws
+.vscode/
+
+# Mac
+.DS_Store
+
+#Env
+.env
+

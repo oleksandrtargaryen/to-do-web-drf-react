@@ -7,3 +7,4 @@ COPY . .
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=todo_project.settings
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+]
