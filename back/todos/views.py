@@ -3,9 +3,9 @@ from rest_framework import status
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import Todo
 from django_filters.rest_framework import DjangoFilterBackend
 
+from .models import Todo
 from .serializers import TodoSerializer
 from .services.todo_services import get_user_todos, create_todo, get_todo_by_id, delete_todo
 
@@ -31,13 +31,19 @@ class TodoDetailAPIView(GenericAPIView):
         return Response(serializer.data)
 
     def put(self, request, todo_id):
-        todo = get_todo_by_id(user = request.user, todo_id = todo_id, data = request.data)
-        serializer = TodoSerializer(todo)
-        return Response(serializer.data)
+        todo = get_todo_by_id(user=request.user, todo_id=todo_id)
+        serializer = TodoSerializer(todo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete_todo(self, request, todo_id):
-        todo = delete_todo(user = request.user, todo_id = todo_id)
-        return Response(status = status.HTTP_204_NO_CONTENT)
+    def delete(self, request, todo_id):
+        # Просто передаємо юзера та ID в сервіс
+        # PyCharm побачить, що аргументи (user, todo_id) збігаються з дефініцією
+        delete_todo(request.user, todo_id)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class TodoListAPIView(ListCreateAPIView):
     serializer_class = TodoSerializer

@@ -19,7 +19,7 @@ class RegisterView(GenericAPIView):
         return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
 
 class LoginView(TokenObtainPairView):
-    permission_classes = (AllowAny,)
+    permission_classes = [AllowAny]
 
 
 class MeView(GenericAPIView):

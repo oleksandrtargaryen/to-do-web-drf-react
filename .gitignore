@@ -40,5 +40,5 @@ staticfiles/
 .DS_Store
 
 #Env
-.env
+back/.env
 
